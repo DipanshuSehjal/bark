@@ -4,12 +4,7 @@ import bark, os
 
 def dat_from_wav(wav, barkname, **attrs):
     rate, data = wavfile.read(wav)
-    if barkname is None:
-        name, ext = os.path.splitext(wav)
-        datname = '{}.dat'.format(name)
-        return bark.write_sampled(datname, data, rate,**attrs)
-    else:
-        return bark.write_sampled(barkname, data, rate,**attrs)
+    return bark.write_sampled(barkname, data, rate,**attrs)
 
 
 def _main():
@@ -20,7 +15,7 @@ def _main():
     converts wav file to bark format
         ''')
     p.add_argument('wav', help='path to wav file')
-    p.add_argument('-o', "--out", help="name and output bark file")
+    p.add_argument('out', help="path to bark file")
     p.add_argument("-a",
         "--attributes",
         action='append',
